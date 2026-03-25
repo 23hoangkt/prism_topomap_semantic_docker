@@ -1,3 +1,5 @@
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+
 xhost +local:docker
 
 docker run --runtime=nvidia --gpus all -it --rm --name prism_topomap_semantic_container \
@@ -9,8 +11,8 @@ docker run --runtime=nvidia --gpus all -it --rm --name prism_topomap_semantic_co
 --privileged \
 -e NVIDIA_DRIVER_CAPABILITIES=all \
 -e NVIDIA_VISIBLE_DEVICES=all \
--v ${HOME}/TopoSLAM/prism_topomap_semantic_docker/data:/data \
--v ${HOME}/TopoSLAM/prism_topomap_semantic_docker/catkin_ws:/home/docker_prism/catkin_ws \
+-v ${SCRIPT_DIR}/data:/data \
+-v ${SCRIPT_DIR}/catkin_ws:/home/docker_prism/catkin_ws \
 -v /media:/media \
 -v /dev:/dev \
 -v /tmp/.Xauthority:/home/docker_prism/.Xauthority:rw \
